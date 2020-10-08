@@ -8,9 +8,10 @@ namespace TicTocGame
         {
             TicTacToe ticTacToe = new TicTacToe();
             Console.WriteLine("Welcome to TicTacToeGame");
-            char [] ticTacToeBoard =ticTacToe.createBoard();
-            char playerSymbol=ticTacToe.chooseSymbol();
-            ticTacToe.showBoard();
+            char [] ticTacToeBoard =ticTacToe.CreateBoard();
+            char playerSymbol=ticTacToe.ChooseSymbol();
+            ticTacToe.ShowBoard();
+            ticTacToe.MakeMove(playerSymbol);
 
         }
 
@@ -19,18 +20,17 @@ namespace TicTocGame
        /// This method is to create board
        /// </summary>
        /// <returns></returns>
-        public char [] createBoard()
+        public char [] CreateBoard()
         {
             for (int i = 0; i < board.Length; i++)
                 board[i] = ' ';
-
             return board;
         }
         /// <summary>
         /// This method is used to Choose players Symbol
         /// </summary>
         /// <returns></returns>
-        public char chooseSymbol()
+        public char ChooseSymbol()
         {
 
             Console.WriteLine("Enter your choice to choose Symbol 1:O 2:X");
@@ -53,22 +53,47 @@ namespace TicTocGame
 
             }
         }
-
-            public void showBoard()
+        /// <summary>
+        /// This is to present board
+        /// </summary>
+            public void ShowBoard()
             {
                 Console.WriteLine(board[1] + "|" + board[2] + "|" + board[3]);
-                Console.WriteLine("--" + " " + "--" + " " + "--");
+                Console.WriteLine("--" + " " + "--" + " " );
                 Console.WriteLine(board[4] + "|" + board[5] + "|" + board[6]);
-                Console.WriteLine("--" + " " + "--" + " " + "--");
+                Console.WriteLine("--" + " " + "--" + " " );
                 Console.WriteLine(board[7] + "|" + board[8] + "|" + board[9]);
+            }
+        /// <summary>
+        /// This is make the move by player
+        /// </summary>
+        /// <param name="playerSymbol"></param>
+        public void MakeMove(char playerSymbol)
+        {
+
+        Console.WriteLine("Enter your choice to mark any location i.e between 1 to 9");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            if (board[choice] == ' ')
+            {
+                board[choice] = playerSymbol;
+                ShowBoard();
+            }
+            else
+            {
+                Console.WriteLine("This position is already filled");
+                MakeMove(playerSymbol);
+            }
+           
+
             }
 
 
+        }
         
 
     }
 
-}
+
 
     
     
