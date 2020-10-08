@@ -12,6 +12,7 @@ namespace TicTocGame
             char playerSymbol=ticTacToe.ChooseSymbol();
             ticTacToe.ShowBoard();
             ticTacToe.MakeMove(playerSymbol);
+            ticTacToe.CoinToss();
 
         }
 
@@ -58,11 +59,11 @@ namespace TicTocGame
         /// </summary>
             public void ShowBoard()
             {
-                Console.WriteLine(board[1] + "|" + board[2] + "|" + board[3]);
-                Console.WriteLine("--" + " " + "--" + " " );
-                Console.WriteLine(board[4] + "|" + board[5] + "|" + board[6]);
-                Console.WriteLine("--" + " " + "--" + " " );
-                Console.WriteLine(board[7] + "|" + board[8] + "|" + board[9]);
+                Console.WriteLine("   "+board[1] + "|  " + board[2] + "|  " + board[3]);
+                Console.WriteLine("------------------------" );
+                Console.WriteLine("   "+board[4] + "|  " + board[5] + "|  " + board[6]);
+                Console.WriteLine("------------------------ " );
+                Console.WriteLine("   "+board[7] + "|  " + board[8] + "|  " + board[9]);
             }
         /// <summary>
         /// This is make the move by player
@@ -86,7 +87,16 @@ namespace TicTocGame
            
 
             }
+        public void CoinToss()
+        { Console.WriteLine("Enter your choice for coin toss 1:Heads 2:tails");
+              int choice = Convert.ToInt32(Console.ReadLine());
+                Random random = new Random();
+            if (choice == random.Next(2))
+                Console.WriteLine("player won the toss and starts game");
+            else
+                Console.WriteLine("computer starts game");
 
+        }
 
         }
         
