@@ -116,6 +116,7 @@ namespace TicTocGame
             Random rand = new Random();
             
             computerTurn = true;
+            //for getting Computer move to win
             for (int i = 1; i < 10; i++)
             {
                 if (board[i] == ' ')
@@ -125,6 +126,7 @@ namespace TicTocGame
                     {
                         board[i] = ' ';
                         choice = i;
+                        break;
                     }
                     else
                     {
@@ -133,9 +135,34 @@ namespace TicTocGame
                     }
                 }
             }
-
+            //for getting computer move to not lose to player
             if (choice == 10)
-            { choice = rand.Next(1, 10); }
+            {
+                for (int i = 1; i < 10; i++)
+                {
+                    if (board[i] == ' ')
+                    {
+                        board[i] = playerSymbol;
+                        if (CheckWinner(board, playerSymbol))
+                        {
+                            board[i] = ' ';
+                            choice = i;
+                            break;
+                        }
+                        else
+                        {
+                            board[i] = ' ';
+                            choice = 11;
+                        }
+                    }
+                }
+                
+            }
+            if (choice == 11)
+            {
+                choice = rand.Next(1, 10);
+            }
+
             if (board[choice] == ' ')
                 {
                     board[choice] = computerSymbol;
