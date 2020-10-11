@@ -125,6 +125,7 @@ namespace TicTocGame
                     {
                         board[i] = ' ';
                         choice = i;
+                        break;
                     }
                     else
                     {
