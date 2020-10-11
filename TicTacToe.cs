@@ -112,14 +112,34 @@ namespace TicTocGame
 
         public void ComputerMove(char[] board)
         {
+            int choice = 0;
+            Random rand = new Random();
             
-           
-                computerTurn = true;
-                Random rand = new Random();
-                int choice = rand.Next(1, 10);
-                if (board[choice] == ' ')
+            computerTurn = true;
+            for (int i = 1; i < 10; i++)
+            {
+                if (board[i] == ' ')
+                {
+                    board[i] = computerSymbol;
+                    if (CheckWinner(board, computerSymbol))
+                    {
+                        board[i] = ' ';
+                        choice = i;
+                    }
+                    else
+                    {
+                        board[i] = ' ';
+                        choice = 10;
+                    }
+                }
+            }
+
+            if (choice == 10)
+            { choice = rand.Next(1, 10); }
+            if (board[choice] == ' ')
                 {
                     board[choice] = computerSymbol;
+               
                     ShowBoard();
                     
                 }
@@ -128,10 +148,8 @@ namespace TicTocGame
                     ComputerMove(ticTacToeBoard);
 
                 }
-            
-
-        }
-
+               }
+     
         public void StartGame(bool turn)
         {
           
