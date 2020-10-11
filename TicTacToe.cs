@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic();
+using System.Collections.Generic;
 
 namespace TicTocGame
 {
@@ -159,12 +159,27 @@ namespace TicTocGame
                 }
                 
             }
-            if (choice == 11)
-            {
-                List<int> list= new List<int> { 1, 3, 7, 9 };
-       int  index = rand.Next(list.Count);
-                choice = list[index];
 
+
+
+            if (choice == 11)//for available Corners
+            {//for available Corners
+                if (board[1] == ' ' || board[3] == ' ' || board[7] == ' ' && board[9] == ' ')
+                {
+                    List<int> list = new List<int> { 1, 3, 7, 9 };
+                    int index = rand.Next(list.Count);
+                    choice = list[index];
+                }
+                //for taking Center
+                else
+                {
+                    if (board[5] == ' ')
+                        choice = 5;
+                    //for choosing any random value
+                    else
+                        choice = rand.Next(10);
+                    
+                }
             }
 
             if (board[choice] == ' ')
