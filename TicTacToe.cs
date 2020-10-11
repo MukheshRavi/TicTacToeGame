@@ -10,14 +10,23 @@ namespace TicTocGame
         public bool computerTurn;
         public static void Main(string[] args)
         {
-            TicTacToe ticTacToe = new TicTacToe();
-            Console.WriteLine("Welcome to TicTacToeGame");
-            bool turn = ticTacToe.CoinToss();
+            int entry;
+            do
+            {
+                TicTacToe ticTacToe = new TicTacToe();
+                Console.WriteLine("Welcome to TicTacToeGame");
+                bool turn = ticTacToe.CoinToss();
 
-            char [] ticTacToeBoard =ticTacToe.CreateBoard();
-           ticTacToe.playerSymbol = ticTacToe.ChooseSymbol();
-            ticTacToe.ShowBoard();
-           ticTacToe.StartGame(turn);
+                char[] ticTacToeBoard = ticTacToe.CreateBoard();
+                ticTacToe.playerSymbol = ticTacToe.ChooseSymbol();
+                ticTacToe.ShowBoard();
+                ticTacToe.StartGame(turn);
+
+                Console.WriteLine("enter choice 1:Play another Game  2:no play");
+          entry   = Convert.ToInt32(Console.ReadLine());
+            }
+
+            while (entry == 1);
             }
 
         public char[]  ticTacToeBoard = new char[10];
@@ -82,6 +91,7 @@ namespace TicTocGame
             if ( ticTacToeBoard[choice] ==' ')
             {
                  ticTacToeBoard[choice] = playerSymbol;
+                Console.WriteLine("");
                 ShowBoard();
             
             }
@@ -149,7 +159,7 @@ namespace TicTocGame
                                 else
                                 {
                                     board[j] = ' ';
-
+                                    //for taking corner moves
                                     if (board[1] == ' ' || board[3] == ' ' || board[7] == ' ' || board[9] == ' ')
                                     {
                                         List<int> list = new List<int> { 1, 3, 7, 9 };
@@ -182,7 +192,7 @@ namespace TicTocGame
             if (board[choice] == ' ')
                 {
                     board[choice] = computerSymbol;
-               
+                Console.WriteLine("");
                     ShowBoard();
                     
                 }
