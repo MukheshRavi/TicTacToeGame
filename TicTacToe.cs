@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic();
 
 namespace TicTocGame
 {
@@ -160,7 +161,10 @@ namespace TicTocGame
             }
             if (choice == 11)
             {
-                choice = rand.Next(1, 10);
+                List<int> list= new List<int> { 1, 3, 7, 9 };
+       int  index = rand.Next(list.Count);
+                choice = list[index];
+
             }
 
             if (board[choice] == ' ')
