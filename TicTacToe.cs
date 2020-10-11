@@ -115,7 +115,7 @@ namespace TicTocGame
         {
             int choice = 0;
             Random rand = new Random();
-            
+
             computerTurn = true;
             //for getting Computer move to win
             for (int i = 1; i < 10; i++)
@@ -132,55 +132,52 @@ namespace TicTocGame
                     else
                     {
                         board[i] = ' ';
-                        choice = 10;
+
+                        //for getting computer move to not lose to player
+
+                        for (int j = 1; j < 10; j++)
+                        {
+                            if (board[j] == ' ')
+                            {
+                                board[j] = playerSymbol;
+                                if (CheckWinner(board, playerSymbol))
+                                {
+                                    board[j] = ' ';
+                                    choice = j;
+                                    break;
+                                }
+                                else
+                                {
+                                    board[j] = ' ';
+
+                                    if (board[1] == ' ' || board[3] == ' ' || board[7] == ' ' || board[9] == ' ')
+                                    {
+                                        List<int> list = new List<int> { 1, 3, 7, 9 };
+                                        int index = rand.Next(list.Count);
+                                        choice = list[index];
+                                    }
+                                    //for taking Center
+                                    else
+                                    {
+                                        if (board[5] == ' ')
+                                            choice = 5;
+                                        //for choosing any random value
+                                        else
+                                            choice = rand.Next(10);
+
+                                    }
+                                }
+                            }
+
+                        }
                     }
                 }
-            }
-            //for getting computer move to not lose to player
-            if (choice == 10)
-            {
-                for (int i = 1; i < 10; i++)
-                {
-                    if (board[i] == ' ')
-                    {
-                        board[i] = playerSymbol;
-                        if (CheckWinner(board, playerSymbol))
-                        {
-                            board[i] = ' ';
-                            choice = i;
-                            break;
-                        }
-                        else
-                        {
-                            board[i] = ' ';
-                            choice = 11;
-                        }
-                    }
-                }
-                
-            }
+            } 
+        
 
 
 
-            if (choice == 11)//for available Corners
-            {//for available Corners
-                if (board[1] == ' ' || board[3] == ' ' || board[7] == ' ' && board[9] == ' ')
-                {
-                    List<int> list = new List<int> { 1, 3, 7, 9 };
-                    int index = rand.Next(list.Count);
-                    choice = list[index];
-                }
-                //for taking Center
-                else
-                {
-                    if (board[5] == ' ')
-                        choice = 5;
-                    //for choosing any random value
-                    else
-                        choice = rand.Next(10);
-                    
-                }
-            }
+           
 
             if (board[choice] == ' ')
                 {
@@ -198,9 +195,15 @@ namespace TicTocGame
      
         public void StartGame(bool turn)
         {
-          
+            if (ticTacToeBoard[1] != ' ' && ticTacToeBoard[2] != ' ' && ticTacToeBoard[3] != ' ' && ticTacToeBoard[4] != ' ' &&
+              ticTacToeBoard[5] != ' ' && ticTacToeBoard[6] != ' ' && ticTacToeBoard[7] != ' ' && ticTacToeBoard[8] == ' '
+              && ticTacToeBoard[9] != ' ')
+            {
+                Console.WriteLine("Match Tied");
+                Environment.Exit(0);
+            }
 
-            if (turn)
+                if (turn)
             {
                 bool isWinner = CheckWinner(ticTacToeBoard,computerSymbol);
                 if (!isWinner)
@@ -275,7 +278,7 @@ namespace TicTocGame
            
         }
 
-
+        
 
         }
     }
